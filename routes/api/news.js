@@ -1,26 +1,8 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 
-const news = require("./routes/api/news");
+const app = express.Router();
 
-const app = express();
-
-//adding body-parser middleware
-app.use(bodyParser.json());
-
-//configure mongo dB
-const db = require("./config/keys").mongoURI;
-
-//News model
-const News = require("./models/News");
-
-//connect to mongoDB
-
-mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Mongo-dB Connected..."))
-  .catch((err) => console.log(err));
+const News = require("../../models/News");
 
 //API routes
 
@@ -28,7 +10,7 @@ mongoose
 //@desc   Get all news
 //@access Public
 
-app.get("/api/news", (req, res) => {
+app.get("/", (req, res) => {
   News.find()
     .sort({ date: -1 })
     .then((news) => res.json(news));
@@ -38,7 +20,7 @@ app.get("/api/news", (req, res) => {
 //@desc   create news
 //@access Public
 
-app.post("/api/news", (req, res) => {
+app.post("/", (req, res) => {
   const newNews = new News({
     title: req.body.title,
     text: req.body.text,
@@ -52,7 +34,7 @@ app.post("/api/news", (req, res) => {
 //@desc   Delete News
 //@access Public
 
-app.delete("/api/news/:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   try {
     const deletedNews = await News.deleteOne({ _id: req.params.id });
     res.json(deletedNews);
@@ -65,7 +47,7 @@ app.delete("/api/news/:id", async (req, res) => {
 //@desc   update News
 //@access Public
 
-app.patch("/api/news/:id", async (req, res) => {
+app.patch("/:id", async (req, res) => {
   try {
     const updateNews = await News.updateOne(
       { _id: req.params.id },
@@ -84,8 +66,4 @@ app.patch("/api/news/:id", async (req, res) => {
   }
 });
 
-app.use("/api/news", news);
-
-const port = 5000;
-
-app.listen(port, () => console.log(`Server started on ${port}`));
+module.exports = app;
