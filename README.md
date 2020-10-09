@@ -1,7 +1,7 @@
 ﻿# React Mongo Express Node News App
 
 To run project we can use `npm run dev` command
-
+to add new post we can go to http://localhost:3000/newpost
 First we start by creating new folder, open that folder and in our terminal we run:
 
 `npm init`
@@ -66,4 +66,5 @@ All CSS in the app is basic and completely custom
   -implement post news component(page)~~
 - implement edit news component(page)
 - implement Login page and authentication
-  -run unit tests
+- run unit tests
+- implement header component for routing
