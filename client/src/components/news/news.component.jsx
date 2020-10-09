@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import "./news.styles.css";
+import { fetchNews } from "../actions/newsActions";
 
 class News extends Component {
   constructor() {
@@ -11,11 +12,9 @@ class News extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/news")
-      .then((res) => res.json())
-      .then((news) =>
-        this.setState({ news }, () => console.log("news fetched:", news))
-      );
+    fetchNews().then((news) =>
+      this.setState({ news }, () => console.log("news fetched:", news))
+    );
   }
 
   render() {

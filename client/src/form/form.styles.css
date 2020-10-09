@@ -1,0 +1,28 @@
+div {
+  box-sizing: border-box;
+  align-items: center;
+}
+form {
+  align-items: center;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #707070;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+}
+input {
+  width: fit-content;
+  display: grid;
+  background-color: #707070;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+  color: white;
+}
+.text {
+  height: 30vh;
+}
